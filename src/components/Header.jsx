@@ -18,16 +18,16 @@ useEffect(() => {
 }, []);
     return (
       
-        <header className="sticky top-0 z-50  backdrop-blur-sm text-purple-500 p-4">
-      <nav className=''>
-        <ul className="flex relative ml-200">
-          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 rounded-lg">
+        <header className="sticky top-0 z-50   backdrop-blur-sm text-purple-500 p-4">
+      <nav className=' text-center'>
+        <ul className="flex gap-4 ml-200 justify-between  text-center">
+          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 mx-auto p-2 rounded-lg">
             <a  href='#about' className="">Skills</a>
           </li>
-          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 rounded-lg">
+          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
             <a href="#projects" className="">Projects</a>
           </li>
-          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 rounded-lg">
+          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
             <a  href="#contact" className= " ">Contact</a>
           </li>
         </ul>
