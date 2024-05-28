@@ -29,6 +29,8 @@ useEffect(() => {
 
   return (
     <>
+      
+
       <Header />
       <div style={{ backgroundImage: `url(${image})`,backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className="w-full h-screen fixed-top sticky">
       <Mesection />
