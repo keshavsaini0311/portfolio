@@ -1,31 +1,93 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs.send(
+      'service_ruuijr5', 
+      'template_c70fezr',
+      formData,
+      'd_XebPKRbCnRFibLQ'
+    ).then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      alert('Message sent successfully!');
+    }).catch((err) => {
+      console.error('FAILED...', err);
+      alert('Failed to send message, please try again later.');
+    });
+
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+  };
+
+
   return (
-    <div  className='bg-gradient-to-r from-zinc-800 to-neutral-950'>
-
-    <section id="contact" className="container mx-auto p-6 text-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold mb-4">Contact Me</h1>
-      <form className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-white">Name</label>
-          <input type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow p-3" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-white">Email</label>
-          <input type="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow p-3" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-white">Message</label>
-          <textarea className="mt-1 block w-full border border-gray-300 rounded-md shadow p-3" rows="5"></textarea>
-        </div>
-        <div>
-          <button type="submit" className="mt-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg shadow">Submit</button>
-        </div>
-      </form>
-    </section>
-
-    </div>
+    <div id="contact" className="bg-gradient-to-r from-zinc-800 to-neutral-950">
+      <h1 className="text-3xl text-center sm:text-4xl text-white font-extrabold tracking-tight">Get in touch</h1>
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-sm font-medium text-white">
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-sm font-medium text-white">
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="message" className="block text-sm font-medium text-white">
+          Message
+        </label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
   )
 }
