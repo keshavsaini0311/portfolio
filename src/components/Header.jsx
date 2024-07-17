@@ -21,14 +21,38 @@ useEffect(() => {
         <header className="sticky top-0 z-50   backdrop-blur-sm text-purple-500 p-4">
       <nav className=' text-center'>
         <ul className="flex gap-4 ml-200 justify-between font-semibold text-xl text-center">
-          <li className="00 bg-opacity- hover:scale-105 hover:bg-black hover:bg-opacity-30 mx-auto p-2 rounded-lg">
-            <a  href='#about' className="">Skills</a>
+          <li 
+          onClick = {(e)=>{
+            e.preventDefault();
+            window.scrollTo({
+            top: document.querySelector("#about").offsetTop,
+            behavior: "smooth",
+            });
+          }}
+          className="00 bg-opacity- hover:scale-105 hover:bg-black hover:bg-opacity-30 mx-auto p-2 rounded-lg">
+            Skills
           </li>
-          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
-            <a href="#projects" className="">Projects</a>
+          <li 
+          onClick = {(e)=>{
+            e.preventDefault();
+            window.scrollTo({
+            top: document.querySelector("#projects").offsetTop,
+            behavior: "smooth",
+            });
+          }}
+          className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
+            Projects
           </li>
-          <li className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
-            <a  href="#contact" className= " ">Contact</a>
+          <li 
+          onClick = {(e)=>{
+            e.preventDefault();
+            window.scrollTo({
+            top: document.querySelector("#contact").offsetTop,
+            behavior: "smooth",
+            });
+          }}
+          className="hover:scale-105 hover:bg-black hover:bg-opacity-30 p-2 mx-auto rounded-lg">
+            Contact
           </li>
         </ul>
       </nav>

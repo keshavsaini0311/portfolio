@@ -1,4 +1,10 @@
-
+.example::-webkit-scrollbar {
+  display: none;
+}
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 
 body{
@@ -6,3 +12,10 @@ body{
   background-repeat: 'no-repeat';
   background-size: 'cover';
 }
+
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */}
+/* Optional: show position indicator in red */

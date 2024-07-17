@@ -15,9 +15,8 @@ export default function Projects() {
           <h1 className="text-3xl text-white text-center font-bold mb-4">Projects</h1>
           <div className="text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
             {projectList.map((project, index) => (
-              <a key={index}  href={project.link}>
-
-              <div className="bg-zinc-800 p-3 rounded shadow-lg transform transition hover:scale-105 h-fit w-fit mx-auto">
+              <a data-aos="zoom-in-up" data-aos-ease="ease-in-sine"  data-aos-duration="700"  key={index}  href={project.link}>
+              <div data-aos="zoom-in-up" data-aos-duration="700"  className=" bg-zinc-800 p-3 rounded shadow-lg transform transition hover:scale-105 h-fit w-fit mx-auto">
                 <img src={project.image} alt={project.name} className="" />
                 <h2 className="text-xl text-center font-bold">{project.name}</h2>
                 <p>{project.description}</p>
