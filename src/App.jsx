@@ -34,6 +34,9 @@ useEffect(() => {
 }, []);
 
   console.log(scrollPosition);
+  useEffect(() => {
+    document.title = "Keshav Saini - Portfolio";
+  }, [])
 
   return (
     <>
