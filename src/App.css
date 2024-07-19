@@ -52,7 +52,8 @@ html {
 .btn--hoverEffect2 {
   display: inline-block;
   z-index: 1;
-  color: #9376d7;
+  color: #ffffff;
+  font-weight: 1000;
 }
 .btn--hoverEffect2:hover {
   color: #fff;

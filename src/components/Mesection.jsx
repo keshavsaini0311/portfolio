@@ -7,7 +7,7 @@ export default function Mesection()  {
   return (
     <section id='home' className="sm:mt-0 text-center  ml-10   flex flex-col justify-center text-white m-4 p-3 rounded-3xl ">
       
-      <div  className="mt-20 md:mt-40 p-3 bg-neutral-900 bg-opacity-60  rounded-2xl text-violet-400 mb-5  z-10 ">
+      <div  className="mt-20 md:mt-40 p-3 bg-neutral-900 bg-opacity-60  rounded-2xl text-violet-600 mb-5  z-10 ">
         <h1 className="text-5xl font-bold mb-4">Hello, I'm Keshav Saini</h1>
         <ReactTyped
           className="text-2xl"

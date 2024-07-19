@@ -117,7 +117,7 @@ export default function Header() {
             </li>
             <li
               onClick={() => handleScrollToSection('contact')}
-              className={`btn btn--hoverEffect2 p-2 rounded-lg ${
+              className={`btn btn--hoverEffect2 p-2  rounded-lg ${
                 activeSection === 'contact' ? 'active text-white' : ''
               }`}
             >
