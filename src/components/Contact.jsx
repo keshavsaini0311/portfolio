@@ -16,7 +16,7 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    formData.message = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
     emailjs.send(
       'service_ruuijr5', 
       'template_c70fezr',
