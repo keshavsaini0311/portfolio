@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 .example::-webkit-scrollbar {
   display: none;
 }
@@ -19,3 +20,88 @@ html {
 ::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */}
 /* Optional: show position indicator in red */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+.active {
+  border-radius: 4px;
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #29dafd, #9424f0);
+  opacity: 1;
+  z-index: -1;
+
+}
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 12px 36px;
+  margin: 10px;
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+.btn--hoverEffect2 {
+  display: inline-block;
+  z-index: 1;
+  color: #9376d7;
+}
+.btn--hoverEffect2:hover {
+  color: #fff;
+}
+.btn--hoverEffect2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.5s all ease;
+  box-sizing: border-box;
+}
+.btn--hoverEffect2:hover::before {
+  border-radius: 4px;
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #29dafd, #9424f0);
+  opacity: 1;
+  z-index: -1;
+}
+
+.btn--hoverEffect3 {
+  display: inline-block;
+  background: #fff;
+  color: #333;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn--hoverEffect3::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 101%;
+  width: 101%;
+  clip-path: polygon(0 0, 100% 0, 10% 25%, 0 100%);
+  background: #444;
+  border-radius: 5px;
+  transition: 0.3s cubic-bezier(0.38, 1.15, 0.7, 1.12);
+  box-sizing: border-box;
+  z-index: -1;
+}
+.btn--hoverEffect3:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.btn--hoverEffect3:hover {
+  color: #fff;
+}

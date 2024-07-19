@@ -14,26 +14,10 @@ import "aos/dist/aos.css";
 function App() {
 
   const [count, setCount] = useState(0)
-  const [scrollPosition, setScrollPosition] = useState(0);
-const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-};
-
 useEffect(() => {
   AOS.init();
   AOS.refresh();
 }, []);
-
-useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-}, []);
-
-  console.log(scrollPosition);
   useEffect(() => {
     document.title = "Keshav Saini - Portfolio";
   }, [])

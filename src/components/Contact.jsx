@@ -39,7 +39,7 @@ export default function Contact() {
 
 
   return (
-    <div id="contact" className="bg-gradient-to-r from-zinc-800 to-neutral-950">
+    <section id="contact" className="bg-gradient-to-r from-zinc-800 to-neutral-950">
       <h1 className="pt-10 text-3xl text-center sm:text-4xl text-white font-extrabold tracking-tight">Get in touch</h1>
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4">
       <div className="mb-4">
@@ -88,6 +88,6 @@ export default function Contact() {
         Send Message
       </button>
     </form>
-  </div>
+  </section>
   )
 }

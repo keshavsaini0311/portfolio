@@ -12,7 +12,7 @@ export default function Projects() {
       return (
         <div  className='p-4 mt-0 bg-gradient-to-r from-zinc-800 to-neutral-950'>
 
-        <section id="projects" className="mt-0 container mx-auto p-4">
+        <section id="project" className="mt-0 container mx-auto p-4">
           <h1 className="text-3xl text-white text-center font-bold mb-4">Projects</h1>
           <div className="text-white w-full flex-wrap flex  gap-8 mt-8">
             {projectList.map((project, index) => (
