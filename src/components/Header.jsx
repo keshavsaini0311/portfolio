@@ -38,7 +38,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-sm text-purple-500 p-4">
+    <header className="overflow-x-clip fixed w-full top-0 z-50 backdrop-blur-sm text-purple-500 p-4">
       <nav className="container mx-auto flex flex-wrap items-center justify-between">
         {/* Logo (Optional) */}
         <div className="text-xl font-bold">

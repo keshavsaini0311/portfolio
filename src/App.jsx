@@ -24,7 +24,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className="example overflow-x-hidden">
+      <div className="">
 
       <AnimatedCursor
       innerSize={10}
