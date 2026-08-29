@@ -14,9 +14,9 @@ npm run lint
 | File | What it holds |
 | --- | --- |
 | `src/data.js` | Every word of content on the page. Edit here, not in the components. |
-| `src/components/Hero.jsx` | Name block and the live event console. |
-| `src/components/Sections.jsx` | Evidence, Systems, Built, Tools, and the footer. |
-| `src/index.css` | Design tokens as component classes (`.display`, `.eyebrow`, `.chip`). |
+| `src/components/Shell.jsx` | The prompt, the section wrapper, and the top bar. |
+| `src/components/Session.jsx` | Every block of the session, in order. |
+| `src/index.css` | Design tokens as component classes (`.cmd`, `.dim`, `.tag`). |
 | `tailwind.config.js` | Palette and typefaces. |
 | `public/Keshav_Saini_Resume.pdf` | The résumé the buttons link to. |
 
@@ -28,13 +28,17 @@ filename is referenced from `profile.resume` in `src/data.js`.
 
 ## Design notes
 
-Colours have jobs, not moods. **Cobalt** means "you can click this."
-**Rust** appears only on the arrow between a before and an after. The dark
-console in the hero is the one loud object on the page; everything around it
-stays quiet on purpose.
+The whole page is one terminal session. Sections are not headings — they are
+commands, and the content is what those commands printed. `whoami`,
+`cat changed.tsv`, `ls -l systems/`.
 
-Type is Archivo (display, width axis pushed wide), Newsreader (prose), and
-IBM Plex Mono (data and labels).
+**Amber phosphor, not acid green.** Every dev terminal reaches for green on
+black; this one is warm. The single non-amber colour on the page is `wire`
+blue, and it means exactly one thing: this is a link.
 
-The console pauses and renders its full list statically under
-`prefers-reduced-motion: reduce`.
+The measure is capped at 56rem. A terminal is about eighty columns wide, and
+a page that stretches to 1400px stops reading as one.
+
+Everything is Spline Sans Mono. A session has one typeface.
+
+The cursor stops blinking under `prefers-reduced-motion: reduce`.

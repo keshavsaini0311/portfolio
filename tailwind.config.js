@@ -4,25 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#EDEFF2',
-        card: '#E4E7EC',
-        ink: '#12161D',
-        graphite: '#55606E',
-        rule: '#CDD3DB',
-        cobalt: '#1B3BEF',
-        rust: '#B4451F',
-        console: '#111721',
-        'console-line': '#1E2734',
-        'console-dim': '#7C8899',
+        // Amber phosphor, not the acid-green every dev terminal reaches for.
+        shell: '#16110C',
+        raised: '#1F1811',
+        seam: '#33281C',
+        amber: '#E8C077',
+        'amber-bright': '#FFDCA8',
+        'amber-dim': '#9C8258',
+        // The one non-amber colour on the page. It means "this is a link".
+        wire: '#7FB2E5',
       },
       fontFamily: {
-        display: ['Archivo', 'system-ui', 'sans-serif'],
-        body: ['Newsreader', 'Georgia', 'serif'],
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        mono: ['"Spline Sans Mono"', 'ui-monospace', 'monospace'],
       },
-      maxWidth: {
-        page: '78rem',
-      },
+      maxWidth: { page: '56rem' },
     },
   },
   plugins: [],
