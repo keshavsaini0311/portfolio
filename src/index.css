@@ -9,47 +9,49 @@
   }
 
   body {
-    @apply bg-paper text-ink font-body;
+    @apply bg-shell font-mono text-amber;
+    /* Faint scanline. One pixel in three, at 4% — enough to read as phosphor,
+       not enough to fight the text. */
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(232, 192, 119, 0.04) 0px,
+      rgba(232, 192, 119, 0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
   }
 
   ::selection {
-    @apply bg-cobalt text-paper;
+    @apply bg-amber text-shell;
   }
 
   :focus-visible {
-    outline: 2px solid theme('colors.cobalt');
+    outline: 2px solid theme('colors.amber-bright');
     outline-offset: 3px;
-    border-radius: 2px;
   }
 }
 
 @layer components {
-  /* The name treatment: Archivo pushed wide on its width axis. */
-  .display {
-    @apply font-display uppercase leading-[0.86] tracking-[-0.015em];
-    font-variation-settings: 'wdth' 118, 'wght' 800;
+  .cmd {
+    @apply text-amber-bright;
   }
 
-  .eyebrow {
-    @apply font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-graphite;
-  }
-
-  /* Section number + title, sharing one baseline rule. */
-  .section-head {
-    @apply flex items-baseline gap-4 border-t border-ink pt-4;
-  }
-
-  .section-title {
-    @apply font-display text-2xl sm:text-3xl uppercase tracking-tight;
-    font-variation-settings: 'wdth' 110, 'wght' 700;
+  .dim {
+    @apply text-amber-dim;
   }
 
   .link {
-    @apply text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt;
+    @apply text-wire underline decoration-wire/30 underline-offset-4 transition-colors hover:decoration-wire;
   }
 
-  .chip {
-    @apply font-mono text-[0.6875rem] text-graphite border border-rule px-2 py-[3px] rounded-full;
+  .tag {
+    @apply border border-seam px-2 py-[3px] text-[0.625rem] uppercase tracking-[0.08em] text-amber-dim;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
@@ -63,12 +65,5 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-@keyframes logIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
   }
 }
