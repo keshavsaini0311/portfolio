@@ -1,6 +1,7 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import { Evidence, Systems, Built, Toolkit, Contact } from './components/Sections'
+import Map from './components/Map'
+import { Changed, Built, Toolkit, Contact } from './components/Sections'
 
 export default function App() {
   return (
@@ -8,8 +9,8 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <Evidence />
-        <Systems />
+        <Map />
+        <Changed />
         <Built />
         <Toolkit />
       </main>
