@@ -2,4 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body;
+  }
+
+  ::selection {
+    @apply bg-cobalt text-paper;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.cobalt');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The name treatment: Archivo pushed wide on its width axis. */
+  .display {
+    @apply font-display uppercase leading-[0.86] tracking-[-0.015em];
+    font-variation-settings: 'wdth' 118, 'wght' 800;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-graphite;
+  }
+
+  /* Section number + title, sharing one baseline rule. */
+  .section-head {
+    @apply flex items-baseline gap-4 border-t border-ink pt-4;
+  }
+
+  .section-title {
+    @apply font-display text-2xl sm:text-3xl uppercase tracking-tight;
+    font-variation-settings: 'wdth' 110, 'wght' 700;
+  }
+
+  .link {
+    @apply text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt;
+  }
+
+  .chip {
+    @apply font-mono text-[0.6875rem] text-graphite border border-rule px-2 py-[3px] rounded-full;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes logIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
