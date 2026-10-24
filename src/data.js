@@ -1,4 +1,4 @@
-// Single source of truth for page content. Mirrors ~/Desktop/Resume/main.tex.
+// Single source of truth for page content. Mirrors ~/Desktop/Life/career/resume/main.tex.
 
 export const profile = {
   name: 'Keshav Saini',
@@ -118,12 +118,12 @@ export const systems = [
 
 export const projects = [
   {
-    name: 'Video Watch Party',
-    period: 'Dec 2024 — Mar 2025',
-    body: 'Synchronized playback for 10+ peers in a room. Media moves peer-to-peer over WebRTC, so the server never relays a stream.',
-    stack: ['Next.js', 'WebRTC', 'shadcn/ui'],
-    code: 'https://github.com/keshavsaini0311/vid-watchparty',
-    live: 'https://vid-watchparty.onrender.com/',
+    name: 'SyncSofa',
+    period: 'Sep 2026 — Present',
+    body: 'Watch YouTube together with synchronized playback, shared playlists and chat. Rooms support up to six people, with peer-to-peer WebRTC calls and SQLite-backed room state.',
+    stack: ['TypeScript', 'React', 'Node.js', 'WebSocket', 'WebRTC', 'SQLite'],
+    code: 'https://github.com/keshavsaini0311/syncsofa',
+    live: 'https://syncsofa.onrender.com/',
   },
   {
     name: 'Social Media App',

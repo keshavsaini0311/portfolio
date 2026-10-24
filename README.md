@@ -22,7 +22,7 @@ npm run lint
 
 ## Keeping it current
 
-The content mirrors `~/Desktop/Resume/main.tex`. When that changes, update
+The content mirrors `~/Desktop/Life/career/resume/main.tex`. When that changes, update
 `src/data.js` and drop a fresh PDF at `public/Keshav_Saini_Resume.pdf` — the
 filename is referenced from `profile.resume` in `src/data.js`.
 
