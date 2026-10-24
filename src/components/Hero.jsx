@@ -39,11 +39,11 @@ function Console() {
     <div className="overflow-hidden rounded-lg border border-console bg-console shadow-[0_24px_48px_-24px_rgba(18,22,29,0.55)]">
       <div className="flex items-center justify-between border-b border-console-line px-4 py-2.5">
         <span className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-console-dim">
-          habuild · production
+          engineering work
         </span>
         <span className="flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-console-dim">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-          consuming
+          replaying
         </span>
       </div>
 
@@ -52,16 +52,16 @@ function Console() {
           <li
             key={row.offset}
             style={{
-              opacity: 0.34 + (0.66 * row.depth) / (WINDOW - 1),
+              opacity: 0.6 + (0.4 * row.depth) / (WINDOW - 1),
               animationDelay: cursor === 0 ? `${i * 70}ms` : '0ms',
             }}
             /* The three oldest records only exist to give the log depth — on a
                phone they cost two lines each, so they drop out. */
-            className={`${row.depth < 3 ? 'hidden sm:grid' : 'grid'} grid-cols-[auto_1fr] gap-x-3 py-[3px] motion-safe:animate-[logIn_420ms_ease-out_both] sm:grid-cols-[auto_10.5rem_1fr] sm:whitespace-nowrap`}
+            className={`${row.depth < 3 ? 'hidden sm:grid' : 'grid'} min-w-0 grid-cols-[auto_1fr] gap-x-3 py-[3px] motion-safe:animate-[logIn_420ms_ease-out_both] xl:grid-cols-[auto_10.5rem_1fr]`}
           >
             <span className="tabular-nums text-console-dim">{row.offset}</span>
             <span className="text-sky-300">{row.topic}</span>
-            <span className="col-span-2 text-slate-400 sm:col-span-1">{row.detail}</span>
+            <span className="col-span-2 break-words text-slate-300 xl:col-span-1">{row.detail}</span>
           </li>
         ))}
       </ol>
@@ -71,18 +71,14 @@ function Console() {
 
 export default function Hero() {
   return (
-    <section id="top" className="mx-auto max-w-page px-5 pb-16 pt-12 sm:px-8 sm:pt-16">
-      {/* Side by side only at xl. The name and the console each have a hard
-          min-content floor (526px + 572px + gap); below 1280 they don't both
-          fit, and a grid can't shrink past min-content — it pushes the page
-          sideways instead. So they stack. */}
-      <div className="grid items-center gap-12 xl:grid-cols-[1fr_1.05fr] xl:gap-16">
-        <div>
+    <section id="top" className="screen-section">
+      <div className="grid min-w-0 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="min-w-0">
           <p className="eyebrow">
             {profile.role} · {profile.company} · {profile.location}
           </p>
 
-          <h1 className="display mt-5 text-[clamp(3.25rem,11vw,6.5rem)]">
+          <h1 className="display mt-5 text-[clamp(3rem,8vw,6.5rem)]">
             Keshav
             <br />
             Saini
@@ -91,6 +87,7 @@ export default function Hero() {
           <p className="mt-7 max-w-md text-lg leading-relaxed text-ink/80 sm:text-xl">
             {profile.lede}
           </p>
+          <p className="mt-4 text-sm text-graphite">Intern to full-time at HaBuild · Open to relocation</p>
 
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs">
             <a
@@ -99,18 +96,16 @@ export default function Hero() {
             >
               Read the résumé
             </a>
-            <a href={profile.github} className="link uppercase tracking-[0.14em]">
-              GitHub
+            <a href="https://syncsofa.onrender.com/" className="link inline-flex min-h-10 items-center uppercase tracking-[0.14em]">
+              Try SyncSofa
             </a>
-            <a href={profile.linkedin} className="link uppercase tracking-[0.14em]">
-              LinkedIn
+            <a href={profile.github} className="link inline-flex min-h-10 items-center uppercase tracking-[0.14em]">
+              GitHub
             </a>
           </div>
         </div>
 
-        {/* Capped so the stacked layout doesn't stretch a 572px-wide log
-            across a 960px column. At xl the track is narrower than this anyway. */}
-        <div className="max-w-2xl">
+        <div className="hidden w-full min-w-0 max-w-2xl md:block">
           <Console />
           <p className="mt-3 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-graphite">
             {stream.length} things I shipped, replaying on a loop

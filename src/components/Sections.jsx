@@ -1,212 +1,153 @@
 import { ledger, systems, projects, stack, proof, profile } from '../data'
 
-// The eyebrow names the kind of claim the section makes, so the labels carry
-// information rather than counting to five.
-function Section({ id, label, title, children, className = '' }) {
+function Section({ id, title, children }) {
   return (
-    <section id={id} className={`mx-auto max-w-page px-5 py-14 sm:px-8 sm:py-20 ${className}`}>
-      <div className="section-head">
-        <span className="eyebrow shrink-0">{label}</span>
-        <h2 className="section-title">{title}</h2>
-      </div>
-      <div className="mt-10">{children}</div>
+    <section id={id} className="screen-section">
+      <h2 className="section-title">{title}</h2>
+      <div className="mt-7 w-full sm:mt-9">{children}</div>
     </section>
   )
 }
 
-export function Evidence() {
+function Evidence() {
   return (
-    <Section id="evidence" label="Measured" title="What changed">
-      <p className="mb-10 max-w-xl text-lg leading-relaxed text-graphite">
-        Every line here is a before and an after. The middle part — the weeks of reading
-        traces and arguing about indexes — is the actual job.
-      </p>
-
-      <dl className="border-t border-rule">
-        {ledger.map((row) => (
-          <div
-            key={row.metric}
-            /* The 16rem label track only earns its keep at lg; at md it steals
-               the width the before→after pair needs and forces a wrap. */
-            className="grid gap-x-10 gap-y-3 border-b border-rule py-7 lg:grid-cols-[16rem_1fr]"
-          >
-            <dt className="font-mono text-xs uppercase tracking-[0.14em] text-graphite">
-              {row.metric}
-            </dt>
-            <dd>
-              <p className="font-display text-2xl sm:text-3xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 600" }}>
-                <span className="text-graphite">{row.before}</span>
-                <span className="mx-3 text-rust" aria-label="became">
-                  →
-                </span>
-                <span className="font-semibold text-ink">{row.after}</span>
-              </p>
-              <p className="mt-2 max-w-2xl leading-relaxed text-ink/70">{row.note}</p>
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
+    <div id="evidence" className="impact-grid">
+      {ledger.map((row) => (
+        <div key={row.metric} className="min-w-0 border-t border-rule py-5">
+          <h3 className="text-sm text-graphite">{row.metric}</h3>
+          <p className="mt-3 font-display text-lg text-graphite">{row.before}</p>
+          <p className="mt-1 font-display text-[clamp(1.45rem,2.5vw,2.4rem)] font-semibold leading-tight text-ink">
+            <span className="mr-2 text-cobalt" aria-label="became">→</span>{row.after}
+          </p>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-graphite">{row.note}</p>
+        </div>
+      ))}
+    </div>
   )
 }
 
 export function Systems() {
   return (
-    <Section id="systems" label="Owned" title="Systems I run">
-      <div className="grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2">
-        {systems.map((s, i) => (
-          <article
-            key={s.name}
-            /* The grid's hairlines come from a bg-rule backing, so an unfilled
-               cell paints as a grey box. With an odd count the last card takes
-               the whole row instead. */
-            className={`bg-paper p-6 sm:p-8 ${
-              systems.length % 2 === 1 && i === systems.length - 1 ? 'sm:col-span-2' : ''
-            }`}
-          >
-            <div className="flex items-baseline justify-between gap-4">
-              <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
-                {s.name}
-              </h3>
-              <span className="shrink-0 font-mono text-[0.6875rem] tracking-tight text-rust">
-                {s.scale}
-              </span>
-            </div>
-            <p className="mt-3 leading-relaxed text-ink/75">{s.body}</p>
-            {s.stack.length > 0 && (
-              <ul className="mt-5 flex flex-wrap gap-1.5">
-                {s.stack.map((t) => (
-                  <li key={t} className="chip">
-                    {t}
-                  </li>
-                ))}
+    <Section id="systems" title="Selected work">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14">
+        <div className="min-w-0">
+          {systems.map((system) => (
+            <article key={system.name} className="work-row">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1">
+                <h3 className="font-display text-xl font-semibold">{system.name}</h3>
+                <span className="text-xs text-graphite">{system.scale}</span>
+              </div>
+              <p className="mt-3 max-w-xl leading-relaxed text-ink/80">{system.body}</p>
+              <ul className="mt-2 space-y-1 text-sm leading-relaxed text-graphite">
+                {system.highlights.map((point) => <li key={point}>{point}</li>)}
               </ul>
-            )}
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
+        <Evidence />
       </div>
     </Section>
   )
 }
 
+function SyncVisual() {
+  return (
+    <figure className="sync-visual" aria-label="Diagram of SyncSofa playback and peer-to-peer calls">
+      <div className="flex items-center justify-between gap-4 border-b border-white/15 px-5 py-4 text-sm text-slate-300">
+        <span className="font-display font-semibold text-white">SyncSofa</span>
+        <span>Room concept</span>
+      </div>
+      <div className="px-6 py-7 sm:px-9 sm:py-9">
+        <div className="video-diagram">
+          <svg viewBox="0 0 72 72" className="h-16 w-16" aria-hidden="true">
+            <circle cx="36" cy="36" r="34" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <path d="M29 23 49 36 29 49Z" fill="currentColor" />
+          </svg>
+          <span className="absolute bottom-5 left-5 text-sm text-slate-300">YouTube playback</span>
+        </div>
+        <div className="relative mt-5 h-1 rounded bg-white/15" aria-hidden="true">
+          <div className="h-full w-2/5 rounded bg-sky-300" />
+          <div className="absolute left-[40%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-sky-300" />
+        </div>
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex -space-x-2" aria-label="Up to six peers">
+            {['#7DD3FC', '#C4B5FD', '#A7F3D0', '#FDBA74', '#FDA4AF', '#CBD5E1'].map((color) => (
+              <span key={color} className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-console" style={{ background: color }}>
+                <svg viewBox="0 0 20 20" className="h-5 w-5 text-console" aria-hidden="true"><circle cx="10" cy="6" r="3" fill="currentColor" /><path d="M4 17v-2a6 6 0 0 1 12 0v2" fill="currentColor" /></svg>
+              </span>
+            ))}
+          </div>
+          <p className="text-sm text-slate-300">Peer-to-peer calls</p>
+        </div>
+        <figcaption className="mt-7 border-t border-white/15 pt-4 text-xs leading-relaxed text-slate-400">
+          Playback and chat sync over WebSockets. Calls connect browsers directly.
+        </figcaption>
+      </div>
+    </figure>
+  )
+}
+
 export function Built() {
   return (
-    <Section id="built" label="Side work" title="Built for myself">
-      <div className="grid gap-10 sm:grid-cols-2">
-        {projects.map((p) => (
-          <article key={p.name} className="border-t border-ink pt-5">
-            <div className="flex items-baseline justify-between gap-4">
-              <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
-                {p.name}
-              </h3>
-              <span className="shrink-0 font-mono text-[0.6875rem] text-graphite">{p.period}</span>
-            </div>
-            <p className="mt-3 leading-relaxed text-ink/75">{p.body}</p>
-            <ul className="mt-5 flex flex-wrap gap-1.5">
-              {p.stack.map((t) => (
-                <li key={t} className="chip">
-                  {t}
-                </li>
-              ))}
+    <Section id="built" title="Built for myself">
+      {projects.map((project) => (
+        <article key={project.name} className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14">
+          <a href={project.live} aria-label="Open SyncSofa live demo" className="block min-w-0 rounded-xl"><SyncVisual /></a>
+          <div className="min-w-0">
+            <p className="text-sm text-graphite">{project.period}</p>
+            <h3 className="mt-3 font-display text-4xl font-semibold sm:text-5xl">{project.name}</h3>
+            <p className="mt-5 max-w-lg text-xl leading-relaxed text-ink/80">{project.body}</p>
+            <ul className="mt-5 space-y-3 text-sm leading-relaxed text-graphite">
+              {project.highlights.map((point) => <li key={point}>{point}</li>)}
             </ul>
-            <p className="mt-5 flex gap-5 font-mono text-[0.6875rem] uppercase tracking-[0.14em]">
-              <a href={p.code} className="link">
-                Source
-              </a>
-              <a href={p.live} className="link">
-                Live
-              </a>
-            </p>
-          </article>
-        ))}
-      </div>
+            <p className="mt-5 text-sm leading-relaxed text-graphite">{project.stack.join(' / ')}</p>
+            <div className="mt-7 flex flex-wrap gap-5 text-sm">
+              <a href={project.live} className="inline-flex min-h-11 items-center rounded bg-ink px-5 font-semibold text-paper transition-colors hover:bg-cobalt">Try SyncSofa</a>
+              <a href={project.code} className="link inline-flex min-h-11 items-center">View source</a>
+            </div>
+            <p className="mt-4 text-xs text-graphite">Free demo: rooms reset when the server restarts.</p>
+          </div>
+        </article>
+      ))}
     </Section>
   )
 }
 
 export function Toolkit() {
   return (
-    <Section id="toolkit" label="Verified" title="Tools and receipts">
-      <div className="grid gap-14 lg:grid-cols-[1.2fr_1fr]">
-        <dl className="border-t border-rule">
-          {stack.map((g) => (
-            <div key={g.group} className="grid gap-x-8 gap-y-2 border-b border-rule py-5 sm:grid-cols-[10rem_1fr]">
-              <dt className="font-mono text-xs uppercase tracking-[0.14em] text-graphite">
-                {g.group}
-              </dt>
-              <dd className="font-mono text-sm leading-relaxed text-ink">{g.items.join('  ·  ')}</dd>
+    <Section id="toolkit" title="Tools and background">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14">
+        <dl>
+          {stack.map((group) => (
+            <div key={group.group} className="grid gap-x-6 gap-y-2 border-t border-rule py-4 sm:grid-cols-[8rem_1fr]">
+              <dt className="text-sm text-graphite">{group.group}</dt>
+              <dd className="min-w-0 text-sm leading-relaxed text-ink">{group.items.join(' / ')}</dd>
             </div>
           ))}
         </dl>
-
-        <dl className="border-t border-rule">
-          {proof.map((p) => {
-            const value = (
-              <>
-                <dt className="font-mono text-xs uppercase tracking-[0.14em] text-graphite">
-                  {p.label}
-                </dt>
-                <dd className="mt-1">
-                  <span className="font-display text-lg" style={{ fontVariationSettings: "'wdth' 106, 'wght' 600" }}>
-                    {p.value}
-                  </span>
-                  <span className="ml-3 text-sm text-graphite">{p.note}</span>
-                </dd>
-              </>
-            )
-            return (
-              <div key={p.label} className="border-b border-rule py-5">
-                {p.href ? (
-                  <a href={p.href} className="block transition-colors hover:text-cobalt">
-                    {value}
-                  </a>
-                ) : (
-                  value
-                )}
-              </div>
-            )
-          })}
+        <dl>
+          {proof.map((item) => (
+            <div key={item.label} className="border-t border-rule py-4">
+              <dt className="text-sm text-graphite">{item.label}</dt>
+              <dd className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                {item.href ? <a href={item.href} className="link font-display text-lg font-semibold">{item.value}</a> : <span className="font-display text-lg font-semibold">{item.value}</span>}
+                <span className="text-sm text-graphite">{item.note}</span>
+              </dd>
+            </div>
+          ))}
         </dl>
       </div>
-    </Section>
-  )
-}
-
-export function Contact() {
-  return (
-    <footer id="contact" className="mt-8 bg-console text-paper">
-      <div className="mx-auto max-w-page px-5 py-20 sm:px-8 sm:py-28">
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-console-dim">
-          Open to SDE-1 and backend roles · India or relocating
-        </p>
-
-        <a
-          href={`mailto:${profile.email}`}
-          className="display mt-6 block break-words text-[clamp(1.75rem,5.5vw,3.25rem)] text-paper transition-colors hover:text-sky-300"
-        >
-          {/* One line on a laptop; on a phone it folds at the @, not mid-word. */}
-          {profile.email.split('@')[0]}
-          <wbr />@{profile.email.split('@')[1]}
-        </a>
-
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-6 border-t border-console-line pt-6 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-console-dim">
-          <span>{profile.location}</span>
-          <div className="flex flex-wrap gap-6">
-            <a href={profile.github} className="transition-colors hover:text-paper">
-              GitHub
-            </a>
-            <a href={profile.linkedin} className="transition-colors hover:text-paper">
-              LinkedIn
-            </a>
-            <a href={profile.resume} className="transition-colors hover:text-paper">
-              Résumé
-            </a>
-            <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="transition-colors hover:text-paper">
-              {profile.phone}
-            </a>
-          </div>
+      <footer id="contact" className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-5 border-t border-ink pt-6 sm:mt-10">
+        <div className="min-w-0">
+          <p className="text-sm text-graphite">Open to backend roles. Based in Bengaluru, open to relocation.</p>
+          <a href={`mailto:${profile.email}`} className="mt-2 block break-words font-display text-[clamp(1.2rem,2.6vw,2rem)] font-semibold hover:text-cobalt">{profile.email}</a>
         </div>
-      </div>
-    </footer>
+        <div className="flex flex-wrap gap-5 text-sm">
+          <a href={profile.github} className="link inline-flex min-h-11 items-center">GitHub</a>
+          <a href={profile.linkedin} className="link inline-flex min-h-11 items-center">LinkedIn</a>
+          <a href={profile.resume} className="link inline-flex min-h-11 items-center">Resume</a>
+        </div>
+      </footer>
+    </Section>
   )
 }
