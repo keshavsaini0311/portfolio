@@ -50,3 +50,12 @@ IBM Plex Mono (data and labels).
 
 The console pauses and renders its full list statically under
 `prefers-reduced-motion: reduce`.
+
+Sections use a viewport minimum height below the sticky navigation, with natural
+growth for longer content on small screens. Navigation remains available on
+phones; the decorative console is hidden below the tablet breakpoint.
+
+Layout references: [Brittany Chiang](https://brittanychiang.com/) for concise work
+summaries, [Rauno Freiberg](https://rauno.me/) for restraint, and
+[Lee Robinson](https://leerob.com/) for direct navigation. This retains the
+existing visual identity rather than implementing the deferred redesign.

@@ -4,8 +4,13 @@
 
 @layer base {
   html {
+    --nav-height: 6rem;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 640px) {
+    html { --nav-height: 3.5rem; }
   }
 
   body {
@@ -24,6 +29,16 @@
 }
 
 @layer components {
+  .screen-section {
+    @apply mx-auto flex w-full max-w-page flex-col justify-center px-5 py-12 sm:px-8;
+    min-height: calc(100svh - var(--nav-height));
+    scroll-margin-top: var(--nav-height);
+  }
+
+  .screen-section > * { min-width: 0; }
+
+  #contact { scroll-margin-top: var(--nav-height); }
+
   /* The name treatment: Archivo pushed wide on its width axis. */
   .display {
     @apply font-display uppercase leading-[0.86] tracking-[-0.015em];
@@ -36,7 +51,7 @@
 
   /* Section number + title, sharing one baseline rule. */
   .section-head {
-    @apply flex items-baseline gap-4 border-t border-ink pt-4;
+    @apply flex flex-col items-start gap-2 border-t border-ink pt-4 sm:flex-row sm:items-baseline sm:gap-4;
   }
 
   .section-title {

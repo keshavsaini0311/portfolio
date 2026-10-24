@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <Evidence />
         <Systems />

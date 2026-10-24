@@ -50,25 +50,34 @@ export const ledger = [
     after: 'cached per process',
     note: 'Added an in-memory cache ahead of Redis for infrequently changing configuration.',
   },
+  {
+    metric: 'Read routing',
+    before: 'PostgreSQL reads',
+    after: '98%+ on replicas',
+    note: 'Moved read traffic to replicas to reduce load on the primary.',
+  },
 ]
 
 export const systems = [
   {
     name: 'Server-driven UI and BFF',
     scale: '100K+ DAU app',
-    body: 'Built screen composition, API aggregation and an admin authoring UI. Added drafts, three-way rebasing, conflict resolution and configuration promotion across environments.',
+    body: 'Built screen composition, API aggregation and an admin authoring UI.',
+    highlights: ['Drafts, three-way rebasing and conflict resolution.', 'Selective configuration promotion with dependency remapping.'],
     stack: ['TypeScript', 'NestJS', 'MongoDB', 'React'],
   },
   {
     name: 'Go analytics pipeline',
     scale: 'Go + SQS',
-    body: 'Hardened event processing with idempotent writes, retries, dead-letter handling, graceful shutdown and OpenTelemetry tracing.',
+    body: 'Hardened production event processing in Go.',
+    highlights: ['Idempotent writes, retries and dead-letter handling.', 'Graceful shutdown, JWT validation and OpenTelemetry tracing.'],
     stack: ['Go', 'Gin', 'AWS SQS', 'OpenTelemetry'],
   },
   {
     name: 'Authentication and security',
     scale: '5 core services',
-    body: 'Closed ownership-check vulnerabilities across five services and hardened shared JWT authentication across six. Built OTP fallback and QR login.',
+    body: 'Closed ownership-check vulnerabilities across five core services.',
+    highlights: ['Hardened shared JWT authentication across six services.', 'Built multi-channel OTP fallback and QR login.'],
     stack: ['TypeScript', 'NestJS', 'Redis', 'JWT'],
   },
 ]
@@ -77,7 +86,8 @@ export const projects = [
   {
     name: 'SyncSofa',
     period: 'Sep 2026 - Present',
-    body: 'Synchronized YouTube playback, shared playlists and chat, with WebRTC calls for up to six people and SQLite-backed room state.',
+    body: 'Watch YouTube together, in sync, on a video call.',
+    highlights: ['Shared playlists, chat and reactions for up to six people.', 'Peer-to-peer WebRTC calls and SQLite-backed state that survives reconnects.'],
     stack: ['TypeScript', 'React', 'Node.js', 'WebSocket', 'WebRTC', 'SQLite'],
     code: 'https://github.com/keshavsaini0311/syncsofa',
     live: 'https://syncsofa.onrender.com/',
@@ -87,6 +97,7 @@ export const projects = [
 export const stack = [
   { group: 'Languages', items: ['TypeScript', 'JavaScript', 'Go', 'C++', 'Python', 'Java', 'SQL'] },
   { group: 'Backend', items: ['Node.js', 'NestJS', 'Express', 'REST', 'WebSocket', 'WebRTC'] },
+  { group: 'Frontend', items: ['React', 'TypeScript', 'Vite'] },
   { group: 'Data & messaging', items: ['PostgreSQL', 'MongoDB', 'Redis', 'Apache Kafka', 'Prisma', 'AWS SQS'] },
   { group: 'Operations', items: ['Docker', 'GitHub Actions', 'OpenTelemetry', 'AWS ECS', 'Linux'] },
 ]

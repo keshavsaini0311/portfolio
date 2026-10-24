@@ -4,12 +4,12 @@ import { ledger, systems, projects, stack, proof, profile } from '../data'
 // information rather than counting to five.
 function Section({ id, label, title, children, className = '' }) {
   return (
-    <section id={id} className={`mx-auto max-w-page px-5 py-14 sm:px-8 sm:py-20 ${className}`}>
+    <section id={id} className={`screen-section ${className}`}>
       <div className="section-head">
         <span className="eyebrow shrink-0">{label}</span>
         <h2 className="section-title">{title}</h2>
       </div>
-      <div className="mt-10">{children}</div>
+      <div className="mt-8 w-full sm:mt-10">{children}</div>
     </section>
   )
 }
@@ -17,21 +17,19 @@ function Section({ id, label, title, children, className = '' }) {
 export function Evidence() {
   return (
     <Section id="evidence" label="Measured" title="What changed">
-      <dl className="border-t border-rule">
+      <dl className="grid gap-x-12 sm:grid-cols-2">
         {ledger.map((row) => (
           <div
             key={row.metric}
-            /* The 16rem label track only earns its keep at lg; at md it steals
-               the width the before→after pair needs and forces a wrap. */
-            className="grid gap-x-10 gap-y-3 border-b border-rule py-7 lg:grid-cols-[16rem_1fr]"
+            className="min-w-0 border-b border-rule py-6"
           >
             <dt className="font-mono text-xs uppercase tracking-[0.14em] text-graphite">
               {row.metric}
             </dt>
             <dd>
-              <p className="font-display text-2xl sm:text-3xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 600" }}>
+              <p className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-display text-[clamp(1.35rem,2.3vw,2rem)]" style={{ fontVariationSettings: "'wdth' 108, 'wght' 600" }}>
                 <span className="text-graphite">{row.before}</span>
-                <span className="mx-3 text-rust" aria-label="became">
+                <span className="text-rust" aria-label="became">
                   →
                 </span>
                 <span className="font-semibold text-ink">{row.after}</span>
@@ -48,16 +46,11 @@ export function Evidence() {
 export function Systems() {
   return (
     <Section id="systems" label="Owned" title="Selected work">
-      <div className="grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2">
-        {systems.map((s, i) => (
+      <div className="grid gap-px overflow-hidden rounded-lg border border-rule bg-rule md:grid-cols-3">
+        {systems.map((s) => (
           <article
             key={s.name}
-            /* The grid's hairlines come from a bg-rule backing, so an unfilled
-               cell paints as a grey box. With an odd count the last card takes
-               the whole row instead. */
-            className={`bg-paper p-6 sm:p-8 ${
-              systems.length % 2 === 1 && i === systems.length - 1 ? 'sm:col-span-2' : ''
-            }`}
+            className="min-w-0 bg-paper p-5 lg:p-7"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
@@ -68,6 +61,9 @@ export function Systems() {
               </span>
             </div>
             <p className="mt-3 leading-relaxed text-ink/75">{s.body}</p>
+            <ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-relaxed text-graphite">
+              {s.highlights.map((point) => <li key={point}>{point}</li>)}
+            </ul>
             {s.stack.length > 0 && (
               <ul className="mt-5 flex flex-wrap gap-1.5">
                 {s.stack.map((t) => (
@@ -87,16 +83,26 @@ export function Systems() {
 export function Built() {
   return (
     <Section id="built" label="Side work" title="Built for myself">
-      <div className="max-w-2xl">
+      <div className="w-full">
         {projects.map((p) => (
-          <article key={p.name} className="border-t border-ink pt-5">
+          <article key={p.name} className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
+            <div className="min-w-0">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
+              <h3 className="font-display text-4xl sm:text-5xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
                 {p.name}
               </h3>
               <span className="shrink-0 font-mono text-[0.6875rem] text-graphite">{p.period}</span>
             </div>
-            <p className="mt-3 leading-relaxed text-ink/75">{p.body}</p>
+            <p className="mt-5 max-w-xl text-xl leading-relaxed text-ink/75">{p.body}</p>
+            <p className="mt-6 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-[0.1em]">
+              <a href={p.live} className="inline-flex min-h-11 items-center rounded bg-ink px-5 text-paper transition-colors hover:bg-cobalt">Try live demo ↗</a>
+              <a href={p.code} className="link inline-flex min-h-11 items-center">View source ↗</a>
+            </p>
+            </div>
+            <div className="min-w-0 border-t border-rule pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <ul className="list-disc space-y-3 pl-4 leading-relaxed text-ink/75">
+              {p.highlights.map((point) => <li key={point}>{point}</li>)}
+            </ul>
             <ul className="mt-5 flex flex-wrap gap-1.5">
               {p.stack.map((t) => (
                 <li key={t} className="chip">
@@ -104,14 +110,8 @@ export function Built() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 flex gap-5 font-mono text-[0.6875rem] uppercase tracking-[0.14em]">
-              <a href={p.code} className="link">
-                Source
-              </a>
-              <a href={p.live} className="link">
-                Live
-              </a>
-            </p>
+            <p className="mt-5 text-sm text-graphite">Free demo: rooms reset when the server restarts.</p>
+            </div>
           </article>
         ))}
       </div>
@@ -122,14 +122,14 @@ export function Built() {
 export function Toolkit() {
   return (
     <Section id="toolkit" label="Verified" title="Tools and receipts">
-      <div className="grid gap-14 lg:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
         <dl className="border-t border-rule">
           {stack.map((g) => (
             <div key={g.group} className="grid gap-x-8 gap-y-2 border-b border-rule py-5 sm:grid-cols-[10rem_1fr]">
               <dt className="font-mono text-xs uppercase tracking-[0.14em] text-graphite">
                 {g.group}
               </dt>
-              <dd className="font-mono text-sm leading-relaxed text-ink">{g.items.join('  ·  ')}</dd>
+              <dd className="min-w-0 font-mono text-sm leading-relaxed text-ink">{g.items.join('  ·  ')}</dd>
             </div>
           ))}
         </dl>
@@ -169,15 +169,17 @@ export function Toolkit() {
 
 export function Contact() {
   return (
-    <footer id="contact" className="mt-8 bg-console text-paper">
-      <div className="mx-auto max-w-page px-5 py-20 sm:px-8 sm:py-28">
+    <footer id="contact" className="bg-console text-paper">
+      <div className="screen-section">
+        <h2 className="font-display text-3xl font-semibold sm:text-5xl">Let’s talk.</h2>
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-console-dim">
           Open to SDE-1 and backend roles · India or relocating
         </p>
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-300">Interested in backend platforms, distributed systems and product engineering.</p>
 
         <a
           href={`mailto:${profile.email}`}
-          className="display mt-6 block break-words text-[clamp(1.75rem,5.5vw,3.25rem)] text-paper transition-colors hover:text-sky-300"
+          className="mt-6 block break-words font-display text-[clamp(1.5rem,4.5vw,3.25rem)] font-semibold text-paper transition-colors hover:text-sky-300"
         >
           {/* One line on a laptop; on a phone it folds at the @, not mid-word. */}
           {profile.email.split('@')[0]}
