@@ -29,10 +29,9 @@ The content mirrors `~/Desktop/Life/career/resume/main.tex`. When that changes, 
 `src/data.js` and drop a fresh PDF at `public/Keshav_Saini_Resume.pdf` — the
 filename is referenced from `profile.resume` in `src/data.js`.
 
-`recentWork` contains the latest engineering case studies. Keep metrics tied to
-verified evidence; distinguish app DAU, configured room limits and automated test
-counts. Public case studies must omit internal repository names, ticket IDs and
-colleague details.
+Keep the copy short and aligned with the current resume. Metrics must have
+verified evidence. Omit internal repository names, ticket IDs and colleague
+details. A redesign belongs in a separate PR.
 
 As of 24 October 2026, Vercel previews are enabled only for
 `portfolio/recent-work-and-syncsofa`, at Keshav's request. Other branches,
