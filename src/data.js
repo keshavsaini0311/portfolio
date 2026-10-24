@@ -5,19 +5,21 @@ export const profile = {
   role: 'SDE-1, Backend',
   company: 'HaBuild',
   location: 'Bengaluru, India',
-  email: 'keshav.sai0311@gmail.com',
+  email: 'ksv.work0311@gmail.com',
   phone: '+91 80827 47003',
   github: 'https://github.com/keshavsaini0311',
   linkedin: 'https://www.linkedin.com/in/keshav-saini-190a53256/',
   resume: '/Keshav_Saini_Resume.pdf',
   lede:
-    'I build the backend behind a consumer app with 100K+ daily users — the config engine, the auth flow, the queues that hold it together. Most of the job is making something faster, then making it boring.',
+    'I build backend systems for a consumer app with 100K+ daily users. My recent work covers a server-driven UI platform, version control for screens, and configuration promotion across environments. I also work on caching, authentication and reliable event processing.',
 }
 
-// Hero console. Every record is a real thing that happened in production.
+// Illustrative activity, based on verified engineering work. Not a live feed.
 export const stream = [
-  { topic: 'members.migrated', detail: '2cr+ records moved to the new system' },
-  { topic: 'service.shipped', detail: 'ux-service · empty repo → prod in 7 days' },
+  { topic: 'screen.rebased', detail: 'three-way merge · field-level conflict choices' },
+  { topic: 'config.promoted', detail: 'selective diffs · dependency remapping' },
+  { topic: 'sdk.checked', detail: 'semver gating for compatible components' },
+  { topic: 'service.shipped', detail: 'community backend · zero to prod in a week' },
   { topic: 'home.config.published', detail: 'cohort rules live in minutes, no app release' },
   { topic: 'read.routed', detail: '98% of reads → postgres replicas' },
   { topic: 'cache.warm', detail: 'dual redis · p50 200ms → 100ms' },
@@ -27,16 +29,33 @@ export const stream = [
   { topic: 'discovery.resolved', detail: 'dynamic service urls across 9 services' },
   { topic: 'qr.session.opened', detail: 'redis lifecycle · rate-limited polling' },
   { topic: 'streak.recovered', detail: 'daily games · streak lives · IST boundaries' },
-  { topic: 'pr.merged', detail: '703 merged · 28 repos · 14 months' },
-  { topic: 'review.approved', detail: '67 reviews · 13 teammates' },
+]
+
+export const recentWork = [
+  {
+    name: 'Version control for app screens',
+    period: 'October 2026',
+    problem: 'Two editors can change the same screen while a draft is still open. Publishing an old draft must not silently overwrite newer work.',
+    approach: 'Built drafts, three-way rebasing, field-level conflict choices, history and reverts. Compare-and-swap checks and MongoDB transactions guard the final write.',
+    result: 'Editors resolve conflicting fields before merging, and stale writes are rejected. Built the backend and the admin workflow together.',
+    stack: ['TypeScript', 'NestJS', 'MongoDB', 'React'],
+  },
+  {
+    name: 'Configuration promotion across environments',
+    period: 'October 2026',
+    problem: 'Moving configuration between environments can overwrite a target hotfix or leave references pointing at objects from the source environment.',
+    approach: 'Built live diffs, selective changes and dependency remapping, with checks that reject a preview if the underlying state changes before apply.',
+    result: 'Teams can preserve target hotfixes through selection and review the exact changes before applying them.',
+    stack: ['TypeScript', 'NestJS', 'MongoDB', 'React'],
+  },
 ]
 
 export const ledger = [
   {
-    metric: 'Member records',
-    before: 'legacy store',
-    after: '2cr+ moved',
-    note: 'Moved the entire member base — over twenty million records — onto a new system.',
+    metric: 'Redis hot-key traffic',
+    before: '30K+ reads/sec on one key',
+    after: 'one read per pod per TTL',
+    note: 'Added an in-process cache ahead of Redis for infrequently changing home-screen configuration. This addressed a separate bottleneck from PostgreSQL read latency.',
   },
   {
     metric: 'Read latency, p50',
@@ -48,7 +67,7 @@ export const ledger = [
     metric: 'OTP delivery rate',
     before: '96%',
     after: '98.4%',
-    note: 'Automatic fallback across SMS, WhatsApp and email — ~60% fewer failed deliveries, at a lower cost per message.',
+    note: 'Automatic fallback across SMS, WhatsApp and email reduced failed deliveries by about 60%.',
   },
   {
     metric: 'Time to change the home screen',
@@ -57,13 +76,13 @@ export const ledger = [
     note: 'A rule engine and admin UI let product target cards and banners by attendance, subscription and challenge state.',
   },
   {
-    metric: 'Endpoints exposing IDOR',
-    before: 'unchecked',
-    after: 'none',
-    note: 'Ownership validation across every endpoint of 5 core services, payment and subscription included.',
+    metric: 'Authorization hardening',
+    before: 'missing ownership checks',
+    after: '5 core services hardened',
+    note: 'Closed insecure direct object references, including in payment and subscription flows. Also hardened shared JWT authentication across 6+ services.',
   },
   {
-    metric: 'ux-service',
+    metric: 'Community backend',
     before: 'empty repo',
     after: 'production',
     note: 'Seven days. Stories, feed and push, reading off a materialized visibility window.',
@@ -72,11 +91,10 @@ export const ledger = [
 
 export const systems = [
   {
-    name: 'Member migration',
-    scale: '2cr+ records',
-    body: 'Moved the entire member base — over two crore records — off the legacy store and onto a new system, with the old and new paths reconciled before the cutover.',
-    // stack: pending — tell me the source and target and I will fill these in.
-    stack: [],
+    name: 'Server-driven UI and BFF',
+    scale: '100K+ DAU app',
+    body: 'Built component registration, surface composition, attribute targeting and API aggregation, plus an admin authoring interface. Semver gates protect older app SDKs; rendering handles device clocks, timezones and scheduled refreshes.',
+    stack: ['NestJS', 'TypeScript', 'MongoDB', 'React'],
   },
   {
     name: 'Home Screen Configuration',
@@ -85,16 +103,22 @@ export const systems = [
     stack: ['NestJS', 'TypeScript', 'MongoDB', 'React'],
   },
   {
-    name: 'ux-service',
+    name: 'Community and feed backend',
     scale: '0 → prod in 7 days',
     body: 'Community stories, the feed and push notifications. Feed reads come off a materialized visibility window instead of a fan-out query. It now hosts the home-screen rule engine.',
     stack: ['NestJS', 'MongoDB', 'Redis'],
   },
   {
     name: 'Daily games platform',
-    scale: '235 PRs',
+    scale: 'Puzzles · quizzes · Sudoku',
     body: 'Puzzle, quiz and Sudoku APIs with per-difficulty generation, answer shuffling and leaderboards. Streaks survive a missed day through "streak lives", and every day boundary is IST-aware.',
     stack: ['NestJS', 'Prisma', 'Redis', 'PostgreSQL'],
+  },
+  {
+    name: 'Go analytics and queue reliability',
+    scale: 'Production Go + SQS',
+    body: 'Hardened JWT validation and rate limiting, added OpenTelemetry tracing, and improved SQS consumer shutdown, idempotent writes, retries and dead-letter handling. This pipeline is separate from the Kafka migration.',
+    stack: ['Go', 'Gin', 'AWS SQS', 'OpenTelemetry'],
   },
   {
     name: 'Auth & identity',
@@ -105,7 +129,7 @@ export const systems = [
   {
     name: 'Service discovery',
     scale: '9 services',
-    body: 'A central resolver for service URLs, rolled out across user, auth, notification, payment, chat, leaderboard, referral, offer and tools — replacing hardcoded endpoints everywhere.',
+    body: 'A central resolver for service URLs, rolled out across 9 services to replace hardcoded endpoints.',
     stack: ['TypeScript', 'Node.js'],
   },
   {
@@ -119,15 +143,17 @@ export const systems = [
 export const projects = [
   {
     name: 'SyncSofa',
-    period: 'Sep 2026 — Present',
+    period: 'Sep 2026 - Present',
     body: 'Watch YouTube together with synchronized playback, shared playlists and chat. Rooms support up to six people, with peer-to-peer WebRTC calls and SQLite-backed room state.',
     stack: ['TypeScript', 'React', 'Node.js', 'WebSocket', 'WebRTC', 'SQLite'],
     code: 'https://github.com/keshavsaini0311/syncsofa',
     live: 'https://syncsofa.onrender.com/',
+    metrics: ['6-person room limit', '95 unit tests', '12 browser tests'],
+    detail: 'Checks cover two-person calls, playlist and chat updates, refreshes and reconnects. The free Render demo uses temporary storage, so rooms reset when the server restarts.',
   },
   {
     name: 'Social Media App',
-    period: 'Jul — Aug 2024',
+    period: 'Jul - Aug 2024',
     body: 'A feed built on paginated MongoDB aggregation, with real-time messaging over Socket.io and optimistic updates on the client.',
     stack: ['MERN', 'Socket.io', 'Chakra UI'],
     code: 'https://github.com/keshavsaini0311/social-media',
@@ -143,8 +169,8 @@ export const stack = [
 ]
 
 export const proof = [
-  { label: 'Codeforces', value: 'Expert · 1605', note: 'Top 2000 in India', href: 'https://codeforces.com/profile/keshav.sai0311' },
-  { label: 'LeetCode', value: 'Top 4% · 1900+', note: '800+ problems solved', href: 'https://leetcode.com/u/user6605NH/' },
-  { label: 'CodeChef', value: '4★ · Div 2', note: 'Top 3K in India', href: 'https://www.codechef.com/users/keshav0311' },
+  { label: 'Codeforces', value: 'Expert · peak 1605', note: 'Competitive programming', href: 'https://codeforces.com/profile/keshav.sai0311' },
+  { label: 'LeetCode', value: '900+ problems solved', note: 'Including 120+ Hard', href: 'https://leetcode.com/u/user6605NH/' },
+  { label: 'CodeChef', value: '4 Star', note: 'Competitive programming', href: 'https://www.codechef.com/users/keshav0311' },
   { label: 'IIIT Nagpur', value: 'B.Tech · 8.16', note: 'Electronics & Communication, 2026', href: null },
 ]

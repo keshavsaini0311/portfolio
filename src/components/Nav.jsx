@@ -1,6 +1,7 @@
 import { profile } from '../data'
 
 const links = [
+  { href: '#recent', label: 'Recent' },
   { href: '#evidence', label: 'Evidence' },
   { href: '#systems', label: 'Systems' },
   { href: '#built', label: 'Built' },

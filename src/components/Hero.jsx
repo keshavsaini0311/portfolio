@@ -39,11 +39,11 @@ function Console() {
     <div className="overflow-hidden rounded-lg border border-console bg-console shadow-[0_24px_48px_-24px_rgba(18,22,29,0.55)]">
       <div className="flex items-center justify-between border-b border-console-line px-4 py-2.5">
         <span className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-console-dim">
-          habuild · production
+          engineering work
         </span>
         <span className="flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-console-dim">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-          consuming
+          replaying
         </span>
       </div>
 

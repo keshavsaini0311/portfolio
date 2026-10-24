@@ -26,6 +26,14 @@ The content mirrors `~/Desktop/Life/career/resume/main.tex`. When that changes, 
 `src/data.js` and drop a fresh PDF at `public/Keshav_Saini_Resume.pdf` — the
 filename is referenced from `profile.resume` in `src/data.js`.
 
+`recentWork` contains the latest engineering case studies. Keep metrics tied to
+verified evidence; distinguish app DAU, configured room limits and automated test
+counts. Public case studies must omit internal repository names, ticket IDs and
+colleague details.
+
+As of 24 October 2026, the expanded portfolio is for local review. Do not trigger
+a Vercel deployment. SyncSofa's demo remains hosted on Render.
+
 ## Design notes
 
 Colours have jobs, not moods. **Cobalt** means "you can click this."

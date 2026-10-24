@@ -1,4 +1,4 @@
-import { ledger, systems, projects, stack, proof, profile } from '../data'
+import { recentWork, ledger, systems, projects, stack, proof, profile } from '../data'
 
 // The eyebrow names the kind of claim the section makes, so the labels carry
 // information rather than counting to five.
@@ -18,8 +18,8 @@ export function Evidence() {
   return (
     <Section id="evidence" label="Measured" title="What changed">
       <p className="mb-10 max-w-xl text-lg leading-relaxed text-graphite">
-        Every line here is a before and an after. The middle part — the weeks of reading
-        traces and arguing about indexes — is the actual job.
+        Selected results from production work. App scale, system limits and test counts
+        are labelled separately so each number has a clear meaning.
       </p>
 
       <dl className="border-t border-rule">
@@ -50,6 +50,36 @@ export function Evidence() {
   )
 }
 
+export function RecentWork() {
+  return (
+    <Section id="recent" label="Recent work" title="Making changes safer">
+      <p className="mb-10 max-w-2xl text-lg leading-relaxed text-graphite">
+        My latest work adds version control and environment promotion to a
+        server-driven UI platform. These are the problems I worked through.
+      </p>
+      <div className="grid gap-8 lg:grid-cols-2">
+        {recentWork.map((work) => (
+          <article key={work.name} className="rounded-lg border border-rule p-6 sm:p-8">
+            <p className="eyebrow">{work.period}</p>
+            <h3 className="mt-3 font-display text-2xl font-semibold">{work.name}</h3>
+            <dl className="mt-6 space-y-5">
+              {[['Problem', work.problem], ['What I built', work.approach], ['Result', work.result]].map(([label, text]) => (
+                <div key={label}>
+                  <dt className="font-mono text-xs uppercase tracking-wider text-cobalt">{label}</dt>
+                  <dd className="mt-2 leading-relaxed text-ink/75">{text}</dd>
+                </div>
+              ))}
+            </dl>
+            <ul className="mt-6 flex flex-wrap gap-1.5">
+              {work.stack.map((tool) => <li key={tool} className="chip">{tool}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </Section>
+  )
+}
+
 export function Systems() {
   return (
     <Section id="systems" label="Owned" title="Systems I run">
@@ -64,7 +94,7 @@ export function Systems() {
               systems.length % 2 === 1 && i === systems.length - 1 ? 'sm:col-span-2' : ''
             }`}
           >
-            <div className="flex items-baseline justify-between gap-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
                 {s.name}
               </h3>
@@ -95,13 +125,21 @@ export function Built() {
       <div className="grid gap-10 sm:grid-cols-2">
         {projects.map((p) => (
           <article key={p.name} className="border-t border-ink pt-5">
-            <div className="flex items-baseline justify-between gap-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h3 className="font-display text-xl" style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}>
                 {p.name}
               </h3>
               <span className="shrink-0 font-mono text-[0.6875rem] text-graphite">{p.period}</span>
             </div>
             <p className="mt-3 leading-relaxed text-ink/75">{p.body}</p>
+            {p.metrics && (
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {p.metrics.map((metric) => (
+                  <li key={metric} className="rounded border border-cobalt/20 bg-cobalt/5 px-3 py-2 font-mono text-xs text-cobalt">{metric}</li>
+                ))}
+              </ul>
+            )}
+            {p.detail && <p className="mt-4 text-sm leading-relaxed text-graphite">{p.detail}</p>}
             <ul className="mt-5 flex flex-wrap gap-1.5">
               {p.stack.map((t) => (
                 <li key={t} className="chip">
