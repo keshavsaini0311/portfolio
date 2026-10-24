@@ -148,3 +148,64 @@ export const proof = [
   { label: 'CodeChef', value: '4★ · Div 2', note: 'Top 3K in India', href: 'https://www.codechef.com/users/keshav0311' },
   { label: 'IIIT Nagpur', value: 'B.Tech · 8.16', note: 'Electronics & Communication, 2026', href: null },
 ]
+
+// ---------------------------------------------------------------------------
+// Service map. Coordinates are hand-placed on an 800x530 viewBox — eight nodes
+// don't need a physics engine, and a fixed layout stays legible at every size.
+// ---------------------------------------------------------------------------
+
+export const services = [
+  {
+    id: 'sdk', short: 'common-sdk',
+    label: 'backend-common-sdk',
+    x: 400,
+    y: 265,
+    role: 'Shared library · 9 services',
+    detail:
+      'The piece every other box on this map depends on. I hardened its JWT payload across six services, then added a central resolver for service URLs and rolled it out to nine — replacing hardcoded endpoints everywhere.',
+    tags: ['TypeScript', 'JWT', 'OpenTelemetry'],
+  },
+  { id: 'auth', short: 'auth', label: 'auth-service', x: 400, y: 70,
+    role: 'Identity',
+    detail: 'Multi-provider OTP over SMS, WhatsApp and email with automatic cross-channel fallback — 96% to 98.4% delivered. QR-code login on a Redis session lifecycle with rate-limited polling. External-token exchange, and a feature-flag layer over GrowthBook that keeps the vendor swappable.',
+    tags: ['NestJS', 'Redis', 'GrowthBook'] },
+  { id: 'payment', short: 'payment', label: 'payment-service', x: 627, y: 143,
+    role: 'Money',
+    detail: 'Closed IDOR here first: every endpoint now validates that the caller owns the thing it is about to return. Messaging moved onto Confluent Kafka with the topics restructured.',
+    tags: ['NestJS', 'Kafka'] },
+  { id: 'notification', short: 'notification', label: 'notification-service', x: 683, y: 308,
+    role: 'Delivery',
+    detail: 'The fan-in point for anything a user receives. Migrated from kafkajs to the Confluent client, and it is the consumer behind OTP, push and chat delivery.',
+    tags: ['Kafka', 'Node.js'] },
+  { id: 'chat', short: 'chat', label: 'chat-service', x: 526, y: 441,
+    role: 'Messaging',
+    detail: 'Kafka client migration and topic restructuring, so chat stopped sharing a topic with unrelated traffic.',
+    tags: ['Kafka', 'WebSocket'] },
+  { id: 'tools', short: 'tools', label: 'tools-service', x: 274, y: 441,
+    role: '235 PRs · my highest-volume repo',
+    detail: 'The daily games platform. Puzzle, quiz and Sudoku APIs with per-difficulty generation and Redis caching, streaks that survive a missed day through "streak lives", and IST-aware day boundaries on every release path. Also where I moved raw SQL onto Prisma with serializable transactions.',
+    tags: ['NestJS', 'Prisma', 'PostgreSQL', 'Redis'] },
+  { id: 'ux', short: 'ux', label: 'ux-service', x: 117, y: 308,
+    role: 'Empty repo to production in 7 days',
+    detail: 'Community stories, the feed and push. Feed reads come off a materialized visibility window instead of a fan-out query. It now hosts the home-screen rule engine that 100K+ daily users hit on open.',
+    tags: ['NestJS', 'MongoDB', 'Redis'] },
+  { id: 'user', short: 'user', label: 'user-service', x: 173, y: 143,
+    role: 'The member base',
+    detail: 'Where two crore member records landed after the migration off the legacy store. Free-member routes and the stats module moved to NestJS incrementally, no big-bang rewrite. A review here caught a password leak before it shipped.',
+    tags: ['NestJS', 'PostgreSQL'] },
+]
+
+// kind: 'sdk' = every service imports it. 'kafka' = an event topic between two.
+export const links = [
+  { from: 'auth', to: 'sdk', kind: 'sdk' },
+  { from: 'payment', to: 'sdk', kind: 'sdk' },
+  { from: 'notification', to: 'sdk', kind: 'sdk' },
+  { from: 'chat', to: 'sdk', kind: 'sdk' },
+  { from: 'tools', to: 'sdk', kind: 'sdk' },
+  { from: 'ux', to: 'sdk', kind: 'sdk' },
+  { from: 'user', to: 'sdk', kind: 'sdk' },
+  { from: 'payment', to: 'notification', kind: 'kafka' },
+  { from: 'notification', to: 'chat', kind: 'kafka' },
+  { from: 'auth', to: 'notification', kind: 'kafka' },
+  { from: 'ux', to: 'notification', kind: 'kafka' },
+]

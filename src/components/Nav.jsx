@@ -1,28 +1,23 @@
 import { profile } from '../data'
 
 const links = [
-  { href: '#evidence', label: 'Evidence' },
-  { href: '#systems', label: 'Systems' },
+  { href: '#map', label: 'Map' },
+  { href: '#changed', label: 'Changed' },
   { href: '#built', label: 'Built' },
   { href: '#contact', label: 'Contact' },
 ]
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-paper/85 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-rule bg-draft/90 backdrop-blur">
       <nav className="mx-auto flex max-w-page items-center justify-between px-5 py-3 sm:px-8">
-        <a href="#top" className="font-mono text-sm font-semibold tracking-tight">
-          keshav<span className="text-cobalt">.</span>saini
+        <a href="#top" className="font-mono text-xs font-semibold tracking-[-0.02em]">
+          keshav<span className="text-viridian">/</span>saini
         </a>
-        {/* ponytail: no hamburger. Five anchors on a one-page site aren't worth a
-            drawer — on mobile the page is the menu, so only the résumé stays. */}
         <ul className="flex items-center gap-5 sm:gap-7">
           {links.map((l) => (
             <li key={l.href} className="hidden sm:block">
-              <a
-                href={l.href}
-                className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-graphite transition-colors hover:text-ink"
-              >
+              <a href={l.href} className="label transition-colors hover:text-ink">
                 {l.label}
               </a>
             </li>
@@ -30,7 +25,7 @@ export default function Nav() {
           <li>
             <a
               href={profile.resume}
-              className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-cobalt underline decoration-cobalt/30 underline-offset-4 hover:decoration-cobalt"
+              className="label text-viridian underline decoration-viridian/30 underline-offset-4 hover:decoration-viridian"
             >
               Résumé
             </a>

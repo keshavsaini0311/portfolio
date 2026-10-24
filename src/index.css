@@ -9,48 +9,52 @@
   }
 
   body {
-    @apply bg-paper text-ink font-body;
+    @apply bg-draft text-ink font-sans;
+    /* Faint grid, like the paper this diagram would have been drawn on. */
+    background-image: linear-gradient(to right, rgba(82, 90, 82, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(82, 90, 82, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
   ::selection {
-    @apply bg-cobalt text-paper;
+    @apply bg-viridian text-draft;
   }
 
   :focus-visible {
-    outline: 2px solid theme('colors.cobalt');
+    outline: 2px solid theme('colors.viridian');
     outline-offset: 3px;
-    border-radius: 2px;
   }
 }
 
 @layer components {
-  /* The name treatment: Archivo pushed wide on its width axis. */
+  .label {
+    @apply font-mono text-[0.625rem] uppercase tracking-[0.1em] text-graphite;
+  }
+
   .display {
-    @apply font-display uppercase leading-[0.86] tracking-[-0.015em];
-    font-variation-settings: 'wdth' 118, 'wght' 800;
-  }
-
-  .eyebrow {
-    @apply font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-graphite;
-  }
-
-  /* Section number + title, sharing one baseline rule. */
-  .section-head {
-    @apply flex items-baseline gap-4 border-t border-ink pt-4;
+    @apply font-mono uppercase font-bold leading-[1.02] tracking-[-0.03em];
   }
 
   .section-title {
-    @apply font-display text-2xl sm:text-3xl uppercase tracking-tight;
-    font-variation-settings: 'wdth' 110, 'wght' 700;
+    @apply font-mono text-lg font-semibold uppercase tracking-[-0.02em] sm:text-xl;
   }
 
   .link {
-    @apply text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt;
+    @apply text-viridian underline decoration-viridian/30 underline-offset-4 transition-colors hover:decoration-viridian;
   }
 
-  .chip {
-    @apply font-mono text-[0.6875rem] text-graphite border border-rule px-2 py-[3px] rounded-full;
+  .tag {
+    @apply border border-rule px-2 py-1 font-mono text-[0.5625rem] uppercase tracking-[0.08em] text-graphite;
   }
+}
+
+/* SVG nodes are focusable groups; give them a ring of their own. */
+.node:focus-visible {
+  outline: none;
+}
+.node:focus-visible rect {
+  stroke: #0b6e4f;
+  stroke-width: 3;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -63,12 +67,5 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-@keyframes logIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
   }
 }

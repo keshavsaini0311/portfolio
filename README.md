@@ -14,8 +14,8 @@ npm run lint
 | File | What it holds |
 | --- | --- |
 | `src/data.js` | Every word of content on the page. Edit here, not in the components. |
-| `src/components/Hero.jsx` | Name block and the live event console. |
-| `src/components/Sections.jsx` | Evidence, Systems, Built, Tools, and the footer. |
+| `src/components/Map.jsx` | The interactive service map and its detail panel. |
+| `src/components/Sections.jsx` | Changed, Built, Tools, and the footer. |
 | `src/index.css` | Design tokens as component classes (`.display`, `.eyebrow`, `.chip`). |
 | `tailwind.config.js` | Palette and typefaces. |
 | `public/Keshav_Saini_Resume.pdf` | The résumé the buttons link to. |
@@ -28,13 +28,17 @@ filename is referenced from `profile.resume` in `src/data.js`.
 
 ## Design notes
 
-Colours have jobs, not moods. **Cobalt** means "you can click this."
-**Rust** appears only on the arrow between a before and an after. The dark
-console in the hero is the one loud object on the page; everything around it
-stays quiet on purpose.
+The page is an engineering print: drafting-paper ground with a faint grid,
+and the service map as the one thing it is built around.
 
-Type is Archivo (display, width axis pushed wide), Newsreader (prose), and
-IBM Plex Mono (data and labels).
+Colours have jobs, not moods. **Viridian** is the plotter pen — structure,
+links, the selected node. **Hot rust** marks an event in flight and nothing
+else. Type is Martian Mono for anything technical and Instrument Sans for
+prose.
 
-The console pauses and renders its full list statically under
-`prefers-reduced-motion: reduce`.
+Node coordinates are hand-placed in `src/data.js` on a fixed layout grid.
+Eight nodes do not need a physics engine, and a fixed layout stays legible at
+every width. Below `md` the graph becomes a list — a node diagram is
+unreadable at 360px.
+
+Kafka edges stop marching under `prefers-reduced-motion: reduce`.
