@@ -2,6 +2,9 @@
 
 One page. React + Vite + Tailwind, two runtime dependencies.
 
+Use Node.js 24.x (`nvm use` if nvm is installed). `package.json` pins the
+deployment runtime; `.nvmrc` keeps local development on the same major version.
+
 ```bash
 npm install
 npm run dev      # http://localhost:5173
