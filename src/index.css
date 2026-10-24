@@ -30,14 +30,31 @@
 
 @layer components {
   .screen-section {
-    @apply mx-auto flex w-full max-w-page flex-col justify-center px-5 py-12 sm:px-8;
+    @apply mx-auto flex w-full max-w-page flex-col justify-center px-5 py-8 sm:px-8 sm:py-10;
     min-height: calc(100svh - var(--nav-height));
     scroll-margin-top: var(--nav-height);
   }
 
   .screen-section > * { min-width: 0; }
 
-  #contact { scroll-margin-top: var(--nav-height); }
+  #contact, #evidence { scroll-margin-top: calc(var(--nav-height) + 1rem); }
+
+  .work-row {
+    @apply border-t border-rule py-5;
+  }
+
+  .impact-grid {
+    @apply grid min-w-0 content-start gap-x-7 sm:grid-cols-2;
+  }
+
+  .sync-visual {
+    @apply min-w-0 overflow-hidden rounded-xl bg-console text-sky-200;
+  }
+
+  .video-diagram {
+    @apply relative flex aspect-[16/9] items-center justify-center rounded-lg border border-white/10;
+    background: radial-gradient(ellipse at 50% 60%, #263b54, #171f2d 75%);
+  }
 
   /* The name treatment: Archivo pushed wide on its width axis. */
   .display {
@@ -55,7 +72,7 @@
   }
 
   .section-title {
-    @apply font-display text-2xl sm:text-3xl uppercase tracking-tight;
+    @apply font-display text-3xl sm:text-4xl tracking-tight;
     font-variation-settings: 'wdth' 110, 'wght' 700;
   }
 

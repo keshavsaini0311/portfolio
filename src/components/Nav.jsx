@@ -1,9 +1,8 @@
 import { profile } from '../data'
 
 const links = [
-  { href: '#evidence', label: 'Evidence' },
-  { href: '#systems', label: 'Systems' },
-  { href: '#built', label: 'Built' },
+  { href: '#systems', label: 'Work' },
+  { href: '#built', label: 'Projects' },
   { href: '#toolkit', label: 'Tools' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -21,7 +20,7 @@ export default function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="inline-flex min-h-11 items-center font-mono text-[0.625rem] uppercase tracking-[0.08em] text-graphite transition-colors hover:text-ink sm:text-[0.6875rem]"
+                className="inline-flex min-h-11 items-center text-sm text-graphite transition-colors hover:text-ink"
               >
                 {l.label}
               </a>

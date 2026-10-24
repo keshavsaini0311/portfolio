@@ -18,7 +18,7 @@ npm run lint
 | --- | --- |
 | `src/data.js` | Every word of content on the page. Edit here, not in the components. |
 | `src/components/Hero.jsx` | Name block and the live event console. |
-| `src/components/Sections.jsx` | Evidence, Systems, Built, Tools, and the footer. |
+| `src/components/Sections.jsx` | Work with impact results, SyncSofa, tools and contact. |
 | `src/index.css` | Design tokens as component classes (`.display`, `.eyebrow`, `.chip`). |
 | `tailwind.config.js` | Palette and typefaces. |
 | `public/Keshav_Saini_Resume.pdf` | The résumé the buttons link to. |
@@ -51,9 +51,12 @@ IBM Plex Mono (data and labels).
 The console pauses and renders its full list statically under
 `prefers-reduced-motion: reduce`.
 
-Sections use a viewport minimum height below the sticky navigation, with natural
-growth for longer content on small screens. Navigation remains available on
-phones; the decorative console is hidden below the tablet breakpoint.
+Four sections use a viewport minimum height below the sticky navigation, with
+natural growth for longer content on small screens. Work and impact results
+share a section; tools and contact share another. SyncSofa uses an original
+interface concept illustration linked to its live demo, not a product screenshot.
+Navigation remains available on phones; the decorative console is hidden below
+the tablet breakpoint.
 
 Layout references: [Brittany Chiang](https://brittanychiang.com/) for concise work
 summaries, [Rauno Freiberg](https://rauno.me/) for restraint, and
