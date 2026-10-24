@@ -34,8 +34,10 @@ verified evidence; distinguish app DAU, configured room limits and automated tes
 counts. Public case studies must omit internal repository names, ticket IDs and
 colleague details.
 
-As of 24 October 2026, the expanded portfolio is for local review. Do not trigger
-a Vercel deployment. SyncSofa's demo remains hosted on Render.
+As of 24 October 2026, Vercel previews are enabled only for
+`portfolio/recent-work-and-syncsofa`, at Keshav's request. Other branches,
+including production `main`, remain disabled in `vercel.json`. SyncSofa's demo
+remains hosted on Render.
 
 ## Design notes
 

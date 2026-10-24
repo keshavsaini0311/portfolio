@@ -76,5 +76,7 @@ map and still keep a straightforward reading experience.
 4. Check desktop and mobile layout, keyboard navigation, reduced motion, resume
    download and every demo/source link. Keep the demo on Render.
 
-No publication is part of this proposal. Vercel Git auto-deployment is disabled
-in this PR's `vercel.json`; a future hosting decision is separate.
+The current content PR has an explicitly authorized Vercel preview. Git
+auto-deployment is enabled only for `portfolio/recent-work-and-syncsofa`;
+production `main` and other branches remain disabled. This does not authorize
+publication of a future redesign or move SyncSofa from Render.
